@@ -30,8 +30,10 @@ Vue.component('product', {
                 Add to Cart
                 </button>
             </div>
+
+            <product-tabs></product-tabs>
+
             <div>
-                <h2>Reviews</h2>
                 <p v-if="!reviews.length">There are no reviews yet.</p>
                 <ul>
                     <li v-for="review in reviews">
@@ -109,25 +111,25 @@ Vue.component('product-review', {
                 </ul>
             </p>
             <p>
-            <label for="name">Name:</label>
-            <input id="name" v-model="name" placeholder="name">
+                <label for="name">Name:</label>
+                <input id="name" v-model="name" placeholder="name">
             </p>
             <p>
-            <label for="review">Review:</label>      
-            <textarea id="review" v-model="review"></textarea>
+                <label for="review">Review:</label>      
+                <textarea id="review" v-model="review"></textarea>
             </p>
             <p>
-            <label for="rating">Rating:</label>
-            <select id="rating" v-model.number="rating">
-                <option>5</option>
-                <option>4</option>
-                <option>3</option>
-                <option>2</option>
-                <option>1</option>
-            </select>
+                <label for="rating">Rating:</label>
+                <select id="rating" v-model.number="rating">
+                    <option>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                </select>
             </p> 
             <p>
-            <input type="submit" value="Submit">  
+                <input type="submit" value="Submit">  
             </p>    
         </form>
     `,
@@ -158,6 +160,25 @@ Vue.component('product-review', {
             }
         }
     } 
+})
+
+Vue.component('product-tabs', {
+    template: `
+        <div>
+            <span class="tab"
+                  v-for="(tab, index) in tabs" 
+                  :key="index"
+                  @click="selectedTab = tab"
+                  :class="{ activeTab: selectedTab === tab }">
+            {{ tab }}</span>
+        </div>
+    `,
+    data() {
+        return {
+            tabs: ['Reviews', 'Make a Review'],
+            selectedTab: 'Reviews'
+        }
+    }
 })
 
 var app = new Vue({
